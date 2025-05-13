@@ -1532,6 +1532,35 @@ Les scores négatifs au début (-20, -21) indiquent que l'agent DQN (raquette ve
 
 
 
+# 9 - Annexe - troubleshooting
+
+
+- *Pour vérifier les versions installées de torch, torchvision et torchaudio dans votre environnement conda env36, utilisez les commandes suivantes :*
+
+```bash
+conda list torch
+conda list torchvision
+conda list torchaudio
+```
+
+- Si ces packages ne sont pas installés via conda, vous pouvez vérifier avec pip :
+
+```bash
+pip list | grep torch
+```
+
+- Si les packages ne sont pas installés, vous verrez une sortie vide. Dans ce cas, vous devrez les installer en utilisant une version compatible avec Python 3.6. Voici la commande recommandée pour installer ces packages :
+
+```bash
+pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+- Cette commande installera les versions CPU de PyTorch, torchvision et torchaudio compatibles avec Python 3.6.
+
+
+
+
+
 
 
 
