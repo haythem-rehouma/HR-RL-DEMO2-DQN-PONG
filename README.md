@@ -1364,17 +1364,18 @@ pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 \
 
 # 8 - Interprétations :
 
+<br/> 
+
+### 8.1. **Pourquoi l'agent obtient-il un score négatif ? Cela signifie-t-il qu’il "perd" ?**
 
 
-> **Pourquoi l'agent obtient-il un score négatif ? Cela signifie-t-il qu’il "perd" ?**
-
-
+```bash
 ... saving checkpoint ...
 ... saving checkpoint ...
 episode:  1 score:  -20.0  average score -20.0 best score -20.00 epsilon 0.98 steps 1923
 episode:  2 score:  -21.0  average score -20.3 best score -20.00 epsilon 0.97 steps 2687
 episode:  3 score:  -21.0  average score -20.5 best score -20.00 epsilon 0.96 steps 3629
-
+```
 
 > RÉPONSE: 
 
@@ -1402,5 +1403,142 @@ L'agent utilise l'algorithme DQN (Deep Q-Network) avec :
 - Le "best score" s'actualisera quand l'agent commencera à s'améliorer
 
 L'apprentissage est un processus long qui nécessite beaucoup d'itérations avant de voir des améliorations significatives dans les performances de l'agent.
+
+
+
+
+
+
+<br/> 
+
+### 8.2. Structure du Projet et explications supplémentaires
+
+**Architecture principale**
+- L'agent DQN (Deep Q-Network) apprend à jouer à Pong
+- L'environnement est prétraité pour optimiser l'apprentissage
+- Le modèle utilise PyTorch pour l'apprentissage profond
+
+## Composants Principaux
+
+**Environnement de jeu**
+- Utilise 'PongNoFrameskip-v4' de OpenAI Gym
+- Les images sont :
+  - Converties en niveaux de gris
+  - Redimensionnées à 84x84 pixels
+  - Normalisées entre 0 et 1
+  - Empilées par 4 pour capturer le mouvement
+
+**Agent DQN**
+- Epsilon-greedy pour l'exploration (commence à 1.0)
+- Diminue progressivement jusqu'à 0.1
+- Mémoire replay de 50000 transitions
+- Taux d'apprentissage de 0.0001
+- Facteur d'actualisation (gamma) de 0.99
+
+## Processus d'Apprentissage
+
+**Boucle principale**
+1. L'agent observe l'état du jeu
+2. Choisit une action (exploration ou exploitation)
+3. Exécute l'action et obtient une récompense
+4. Stocke l'expérience dans la mémoire replay
+5. Apprend périodiquement sur un batch de 32 expériences
+
+**Réseau de neurones**
+- 3 couches convolutives
+- 2 couches entièrement connectées
+- Optimiseur RMSprop
+- Fonction de perte MSE
+
+## Indicateurs visibles
+
+- Score : points marqués dans la partie
+- Average score : moyenne mobile sur 100 épisodes
+- Epsilon : taux d'exploration actuel
+- Steps : nombre total d'actions effectuées
+
+## Interface graphique
+
+La fenêtre affichée montre :
+- La barre verte : la raquette de l'agent
+- La barre brune : l'adversaire
+- Le carré vert : la balle
+- Le fond marron : le terrain de jeu
+
+L'apprentissage prend du temps et les scores négatifs au début sont normaux car l'agent apprend progressivement à jouer.
+
+<br/> 
+
+## 8.3. Conclusion
+
+Dans ce jeu de Pong, voici les joueurs :
+
+## L'agent DQN (Deep Q-Network)
+- Contrôle la raquette verte à droite
+- C'est l'agent qui apprend à jouer via l'apprentissage par renforcement
+- Utilise un réseau de neurones profond pour apprendre la stratégie optimale
+
+## L'adversaire
+- La raquette marron à gauche
+- C'est un adversaire intégré au jeu (IA simple)
+- Fait partie de l'environnement Pong d'Atari
+
+## Fonctionnement
+- L'agent DQN observe l'état du jeu (positions des raquettes et de la balle)
+- Il choisit une action (monter ou descendre sa raquette)
+- Il reçoit une récompense (+1 quand il marque, -1 quand il encaisse un point)
+- Il apprend progressivement à jouer en optimisant ses actions pour maximiser ses récompenses
+
+Les scores négatifs au début (-20, -21) indiquent que l'agent DQN (raquette verte) est en train d'apprendre et perd contre l'adversaire intégré (raquette marron).
+
+
+
+## Les épisodes
+- Un épisode est une partie complète de Pong qui se termine quand un joueur atteint 21 points
+- Le score -21.0 signifie que l'agent a perdu la partie en encaissant 21 points
+
+## Les métriques
+
+**Score**
+- Score négatif (-20.0, -21.0) indique le nombre de points encaissés par l'agent
+- Plus le score est proche de 0, meilleur est l'agent
+
+**Average score**
+- Moyenne mobile des 100 derniers scores
+- Passe de -20.0 à -20.7, montrant une légère dégradation des performances
+
+**Epsilon (ε)**
+- Commence à 0.98 et diminue progressivement (0.98 → 0.97 → 0.96)
+- Représente la probabilité que l'agent fasse une action aléatoire
+- Plus epsilon diminue, plus l'agent utilise sa stratégie apprise plutôt que l'exploration aléatoire
+
+**Steps**
+- Nombre total d'actions effectuées depuis le début de l'entraînement
+- Augmente de 1923 → 2687 → 3629 → 4481 → 5481
+- N'indique pas directement une amélioration, mais plutôt l'expérience accumulée par l'agent
+
+## Progression
+- L'agent est encore en phase d'apprentissage initial
+- Les scores négatifs constants montrent qu'il n'a pas encore appris de stratégie efficace
+- La diminution d'epsilon indique qu'il commence à moins explorer et plus exploiter sa connaissance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
