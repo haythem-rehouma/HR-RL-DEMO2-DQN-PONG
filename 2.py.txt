@@ -1,0 +1,35 @@
+import requests
+from packaging import version
+
+def get_latest_py36_compatible(pkg):
+    url = f"https://pypi.org/pypi/{pkg}/json"
+    try:
+        res = requests.get(url, timeout=5)
+        data = res.json()
+        releases = data["releases"]
+        compatible_versions = []
+        for v in releases:
+            for file_info in releases[v]:
+                requires_python = file_info.get("requires_python")
+                if requires_python:
+                    if "3.6" in requires_python or ">=3.6" in requires_python:
+                        compatible_versions.append(v)
+                        break
+                else:
+                    compatible_versions.append(v)
+                    break
+        if compatible_versions:
+            return str(sorted([version.parse(v) for v in compatible_versions])[-1])
+        return "No compatible version found"
+    except Exception as e:
+        return f"Error: {e}"
+
+modules = [
+    "gym", "numpy", "matplotlib", "cloudpickle",
+    "scipy", "torch", "torchvision", "torchaudio", "opencv-python"
+]
+
+print("Versions compatibles Python 3.6 :\n")
+for mod in modules:
+    v = get_latest_py36_compatible(mod)
+    print(f"{mod}=={v}")

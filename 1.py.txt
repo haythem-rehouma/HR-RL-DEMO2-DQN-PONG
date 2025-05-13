@@ -1,0 +1,25 @@
+import os
+import re
+
+def extract_imports(directory="."):
+    modules = set()
+    for root, _, files in os.walk(directory):
+        for fname in files:
+            if fname.endswith(".py"):
+                try:
+                    with open(os.path.join(root, fname), encoding="utf-8") as f:
+                        for line in f:
+                            match = re.match(r'^\s*(import|from)\s+([a-zA-Z0-9_\.]+)', line)
+                            if match:
+                                mod = match.group(2).split('.')[0]
+                                if mod not in ['__future__']:
+                                    modules.add(mod)
+                except:
+                    continue
+    return sorted(modules)
+
+if __name__ == "__main__":
+    found = extract_imports()
+    print("\nModules trouvés :")
+    for mod in found:
+        print(mod)
