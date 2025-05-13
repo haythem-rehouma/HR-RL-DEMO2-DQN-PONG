@@ -17,7 +17,7 @@
 
 # 2 - Description
 
-### 1. Composants réutilisables et utilitaires
+### 2.1. Composants réutilisables et utilitaires
 
 | Fichier                 | Description                                                                                                       |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +27,7 @@
 
 ---
 
-### 2. Version PyTorch
+### 2.2. Version PyTorch
 
 | Fichier             | Description                                                                                         |
 | ------------------- | --------------------------------------------------------------------------------------------------- |
@@ -37,7 +37,7 @@
 
 ---
 
-### 3. Version TensorFlow 2.x (dossier `tf2/`)
+### 2.3. Version TensorFlow 2.x (dossier `tf2/`)
 
 | Fichier                | Description                                                                            |
 | ---------------------- | -------------------------------------------------------------------------------------- |
@@ -49,7 +49,7 @@
 
 ---
 
-### 4. Organisation suggérée des fichiers
+### 2.4. Organisation suggérée des fichiers
 
 ```
 .
@@ -70,7 +70,7 @@
 
 ---
 
-### 5. Références GitHub associées
+### 2.5. Références GitHub associées
 
 * GitHub. (2024). *DQN-Atari-Pong* \[Code source]. [https://github.com/hrhouma/DQN-Atari-Pong](https://github.com/hrhouma/DQN-Atari-Pong)
 * GitHub. (2024). *dqn-pong* \[Code source]. [https://github.com/hrhouma/dqn-pong](https://github.com/hrhouma/dqn-pong)
