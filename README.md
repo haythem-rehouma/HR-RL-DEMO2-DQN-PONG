@@ -1211,5 +1211,196 @@ python main_dqn_2.py (AVEC INTERFACE)
 
 
 
+<br/>
+
+# 7 - Structuration
+
+- Le document `Dqn Pong Readme`  inclut :
+
+* Une vue d'ensemble pédagogique du projet
+* Une description claire et précise de chaque fichier
+* La structure du dossier avec `tree`
+* Toutes les commandes essentielles pour exécuter et configurer l’environnement
+
+
+## 7.1 - Références du projet
+
+* GitHub. (2024). *DQN-Atari-Pong* \[Code source]. [https://github.com/hrhouma/DQN-Atari-Pong](https://github.com/hrhouma/DQN-Atari-Pong)
+* GitHub. (2024). *dqn-pong* \[Code source]. [https://github.com/hrhouma/dqn-pong](https://github.com/hrhouma/dqn-pong)
+
+## 7.2 - Description des fichiers
+
+### 7.2.1 Composants utilitaires communs
+
+| Fichier                 | Description                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `utils.py`              | Fonctions utilitaires : création d'environnements personnalisés Gym, wrappers, prétraitement, tracés matplotlib. |
+| `replay_memory.py`      | Tampon de relecture (Replay Buffer) pour stocker les transitions de l'agent.                                     |
+| `preprocess_pseudocode` | Pseudocode d'explication pour `RepeatActionAndMaxFrame`, `PreprocessFrame`, `StackFrames`.                       |
+
+### 7.2.2 Version PyTorch
+
+| Fichier             | Description                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `main_dqn.py`       | Script principal d'entraînement avec PyTorch.                                           |
+| `dqn_agent.py`      | Implémentation de l'agent DQN (choix d'action, apprentissage, réduction ε, sauvegarde). |
+| `deep_q_network.py` | Réseau de neurones convolutionnel pour Q-Learning (CNN avec PyTorch).                   |
+
+### 7.2.3 Version TensorFlow 2.x (dossier `tf2/`)
+
+| Fichier                | Description                                                      |
+| ---------------------- | ---------------------------------------------------------------- |
+| `tf2/agent.py`         | Agent DQN avec réseau d'évaluation et réseau cible.              |
+| `tf2/main.py`          | Script principal d'entraînement (TensorFlow).                    |
+| `tf2/network.py`       | Réseau CNN avec Keras.                                           |
+| `tf2/replay_memory.py` | Buffer adapté à TensorFlow.                                      |
+| `tf2/utils.py`         | Même logique que `utils.py` avec gestion mémoire GPU TensorFlow. |
+
+### 7.2.4 Structure du projet (dossier local)
+
+```bash
+C:\Users\rehou\Documents\dqn-pong
+├── main_dqn.py
+├── dqn_agent.py
+├── deep_q_network.py
+├── replay_memory.py
+├── utils.py
+├── preprocess_pseudocode
+├── README.md
+├── tf2/
+│   ├── agent.py
+│   ├── main.py
+│   ├── network.py
+│   ├── replay_memory.py
+│   └── utils.py
+├── models/               # Dossiers contenant les checkpoints
+├── plots/                # Fichiers .png générés
+└── __pycache__/          # Dossiers de cache Python
+```
+
+## 7.3 - Commandes utiles
+
+### Afficher tous les fichiers et sous-dossiers du projet
+
+```powershell
+cd .\dqn-pong\
+tree ..\dqn-pong\ /f
+```
+
+### Exemple de sortie :
+
+```text
+C:\USERS\REHOU\DOCUMENTS\DQN-PONG
+│   deep_q_network.py
+│   dqn_agent.py
+│   main_dqn.py
+│   replay_memory.py
+│   utils.py
+├───models
+│       PongNoFrameskip-v4_DQNAgent_q_eval
+│       PongNoFrameskip-v4_DQNAgent_q_next
+├───plots
+│       DQNAgent_PongNoFrameskip-v4_lr0.0001_250games.png
+├───tf2
+│       agent.py
+│       main.py
+│       network.py
+│       replay_memory.py
+│       utils.py
+└───__pycache__
+```
+
+## 7.4 - Environnement Python 3.6 avec PyTorch 1.8.1 CPU
+
+### Installation
+
+```bash
+conda install numpy==1.16.6
+conda install matplotlib==3.3.4
+conda install cloudpickle==1.6.0
+conda install scipy=1.5.3 -c conda-forge
+pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 \
+    -f https://download.pytorch.org/whl/torch_stable.html
+conda install -c conda-forge opencv
+pip install gym==0.21.0
+pip install gym[atari]
+pip install autorom[accept-rom-license]
+```
+
+### Tests de version
+
+```bash
+python -c "import gym; print(gym.__version__)"
+python -c "import cv2; print(cv2.__version__)"
+```
+
+## 7.5 - Exécution des fichiers
+
+```bash
+python test_env_1.py
+python test_env_2.py
+python test_env_3.py
+python main_dqn.py       # Entraînement PyTorch
+python tf2/main.py       # Entraînement TensorFlow
+```
+
+### Nettoyage PyTorch en cas de conflit
+
+```bash
+pip uninstall torch torchvision torchaudio
+pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 \
+    -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+## 7.6 - Liens GitHub
+
+* [https://github.com/hrhouma/DQN-Atari-Pong](https://github.com/hrhouma/DQN-Atari-Pong)
+* [https://github.com/hrhouma/dqn-pong](https://github.com/hrhouma/dqn-pong)
+
+
+<br/>
+<br/>
+
+
+# 8 - Interprétations :
+
+
+
+> **Pourquoi l'agent obtient-il un score négatif ? Cela signifie-t-il qu’il "perd" ?**
+
+
+... saving checkpoint ...
+... saving checkpoint ...
+episode:  1 score:  -20.0  average score -20.0 best score -20.00 epsilon 0.98 steps 1923
+episode:  2 score:  -21.0  average score -20.3 best score -20.00 epsilon 0.97 steps 2687
+episode:  3 score:  -21.0  average score -20.5 best score -20.00 epsilon 0.96 steps 3629
+
+
+> RÉPONSE: 
+
+- Oui, l'agent est en plein apprentissage ! Voici l'explication des différents éléments affichés :
+
+## Indicateurs d'apprentissage
+
+- **Score**: Les scores négatifs (-20.0, -21.0) sont normaux au début car l'agent perd contre l'adversaire
+- **Epsilon**: Diminue progressivement (0.99 → 0.98 → 0.97) ce qui indique que l'agent explore de moins en moins et exploite de plus en plus sa connaissance
+- **Steps**: Augmente (932 → 1923 → 2687) montrant que l'agent accumule de l'expérience
+
+## Processus d'apprentissage
+
+L'agent utilise l'algorithme DQN (Deep Q-Network) avec :
+- Exploration aléatoire au début (epsilon élevé)
+- Stockage des expériences dans la mémoire replay
+- Apprentissage progressif du réseau de neurones
+- Sauvegarde des meilleurs modèles ("saving checkpoint")
+
+## Points importants
+
+- L'avertissement "VisibleDeprecationWarning" n'affecte pas l'apprentissage
+- Les scores négatifs sont normaux dans les premiers épisodes
+- L'agent a besoin de plusieurs milliers d'épisodes pour commencer à s'améliorer
+- Le "best score" s'actualisera quand l'agent commencera à s'améliorer
+
+L'apprentissage est un processus long qui nécessite beaucoup d'itérations avant de voir des améliorations significatives dans les performances de l'agent.
 
 
