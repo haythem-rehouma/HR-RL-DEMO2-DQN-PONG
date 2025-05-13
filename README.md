@@ -1069,5 +1069,147 @@ if __name__ == '__main__':
 ```
 
 
+<br/>
+
+
+# 4 -  Commandes partie 1
+
+```python
+cd .\dqn-pong\
+tree ..\dqn-pong\ /f
+```
+
+```python
+PS C:\Users\rehou\Documents\dqn-pong> tree ..\dqn-pong\ /f
+Structure du dossier pour le volume OS
+Le numéro de série du volume est 8433-41AA
+C:\USERS\REHOU\DOCUMENTS\DQN-PONG
+│   1.py.txt
+│   2.py.txt
+│   deep_q_network.py
+│   dqn_agent.py
+│   main_dqn.py
+│   main_dqn_2.py
+│   preprocess_pseudocode
+│   README.md
+│   replay_memory.py
+│   test_env_1.py
+│   test_env_2.py
+│   test_env_3.py
+│   utils.py
+│
+├───models
+│       PongNoFrameskip-v4_DQNAgent_q_eval
+│       PongNoFrameskip-v4_DQNAgent_q_next
+│
+├───plots
+│       DQNAgent_PongNoFrameskip-v4_alpha0.0001_500games.png
+│
+├───tf2
+│       agent.py
+│       main.py
+│       network.py
+│       replay_memory.py
+│       utils.py
+│
+└───__pycache__
+        deep_q_network.cpython-36.pyc
+        dqn_agent.cpython-36.pyc
+        replay_memory.cpython-36.pyc
+        utils.cpython-36.pyc
+```
+
+
+
+<br/>
+
+
+# 5 -  Commandes partie 2
+
+
+![image](https://github.com/user-attachments/assets/7185775a-2708-4dd1-a797-03c925978b9f)
+
+![image](https://github.com/user-attachments/assets/1f4ec7e1-7601-4450-8013-154a48f58835)
+
+
+```python
+(env36) C:\Users\rehou> python --version
+Python 3.6.13 :: Anaconda, Inc.
+conda install numpy==1.16.6
+conda install matplotlib==3.3.4 
+conda install cloudpickle==1.6.0
+conda install matplotlib==3.0.3
+conda install scipy=1.5.3 -c conda-forge
+pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
+conda install -c conda-forge opencv
+conda list OpenCV
+```
+
+
+```python
+import cv2
+print(cv2.__version__)
+exit()
+pip install gym==0.21.0
+# Gym 0.21.0 est la dernière version compatible avec Python 3.6_
+# N'utilisez pas conda install gym car il y a des problèmes de compatibilité avec Python 3.6
+pip install numpy==1.19.5
+pip install cloudpickle==1.6.0
+```
+
+```python
+import gym
+print(gym.__version__)
+exit()
+```
+
+```python
+pip install gym[atari]
+pip install autorom[accept-rom-license]
+conda install -c conda-forge gym-atari
+conda list
+```
+
+```python
+import gym
+print(gym.__version__)
+exit()
+```
+
+
+```python
+python 1.py.txt  
+python test_env.py
+python test_env_1.py  
+python test_env_2.py  
+python test_env_3.py 
+python main_dqn.py  
+python main_dqn_2.py  
+```
+
+
+
+<br/>
+
+
+# 6 -  Commandes partie 3
+
+- En cas de problèmes 
+
+```python
+pip uninstall torch torchvision torchaudio
+pip install torch==1.8.1+cpu torchvision==0.9.1+cpu torchaudio==0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
+```
+
+# 
+```python
+python test_env_2.py
+python main_dqn.py (SANS INTERFACE GRAPHIQUE)
+python main_dqn_2.py (AVEC INTERFACE)
+```
+
+
+
+
 
 
